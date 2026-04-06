@@ -78,7 +78,11 @@ export function applyVersionCompatibility(
     }
     if (regexResult?.groups?.compatibility !== currentCompatibility) {
       logger.trace(
-        { releaseVersion: release.version, versionCompatibility },
+        {
+          releaseVersion: release.version,
+          versionCompatibility,
+          currentCompatibility,
+        },
         'versionCompatibility: Does not match compatibility',
       );
       return null;

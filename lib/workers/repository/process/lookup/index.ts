@@ -127,6 +127,7 @@ export async function lookupUpdates(
           'version compatibility regex match',
         );
         config.currentCompatibility = regexMatch.groups.compatibility;
+        res.currentCompatibility = config.currentCompatibility;
         compareValue = regexMatch.groups.version;
       } else {
         logger.debug(

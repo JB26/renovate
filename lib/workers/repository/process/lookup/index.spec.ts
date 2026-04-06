@@ -4207,6 +4207,7 @@ describe('workers/repository/process/lookup/index', () => {
       expect(res).toEqual({
         currentVersion: '18.10.0',
         fixedVersion: '18.10.0',
+        currentCompatibility: '-alpine',
         isSingleVersion: true,
         registryUrl: 'https://index.docker.io',
         sourceUrl: 'https://github.com/nodejs/node',
@@ -4321,6 +4322,7 @@ describe('workers/repository/process/lookup/index', () => {
 
       expect(res).toEqual({
         currentVersion: 'bullseye',
+        currentCompatibility: '-slim',
         fixedVersion: 'bullseye',
         isSingleVersion: true,
         registryUrl: 'https://index.docker.io',

@@ -60,6 +60,7 @@ export interface UpdateResult {
   deprecationMessage?: string;
   sourceUrl?: string | null;
   currentVersion?: string;
+  currentCompatibility?: string;
   isSingleVersion?: boolean;
   lookupName?: string;
   skipReason?: SkipReason;
