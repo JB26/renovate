@@ -1612,6 +1612,34 @@ describe('workers/repository/update/pr/changelog/release-notes', () => {
         expect(res).toBeNull();
       });
 
+      it('parses uppercase version title V1.2.3 when version is v1.2.3', async () => {
+        const changelogMd = '## V1.2.3\n\nSome release notes';
+        httpMock
+          .scope('https://api.github.com')
+          .get('/repos/some/repo')
+          .reply(200)
+          .get('/repos/some/repo/git/trees/HEAD')
+          .reply(200, githubTreeResponse)
+          .get('/repos/some/repo/git/blobs/abcd')
+          .reply(200, {
+            content: toBase64(changelogMd),
+          });
+
+        const res = await getReleaseNotesMd(
+          {
+            ...githubProject,
+            repository: 'some/repo',
+          },
+          partial<ChangeLogRelease>({
+            version: 'v1.2.3',
+            gitRef: 'v1.2.3',
+          }),
+        );
+
+        expect(res).not.toBeNull();
+        expect(res?.body).toContain('Some release notes');
+      });
+
       it('isUrl', () => {
         expect(versionOneNotes).not.toMatchObject(versionTwoNotes);
       });

@@ -396,7 +396,7 @@ export async function getReleaseNotesMd(
           const url = `${notesSourceUrl}#${mdHeadingLink}`;
           // Look for version in title
           for (const word of title) {
-            if (word.includes(version) && !isHttpUrl(word)) {
+            if (word.toLowerCase().includes(version) && !isHttpUrl(word)) {
               logger.trace({ body }, 'Found release notes for v' + version);
               return {
                 body: await linkifyBody(project, body),
